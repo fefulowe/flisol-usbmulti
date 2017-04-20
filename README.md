@@ -87,8 +87,8 @@ grub-install --verbose --target=x86_64-efi --efi-directory=$mountpoint --boot-di
 ```
 
 # Habilitar la arquitectura i386 pra grub-pc (bios) (derivados debian solamente)
-# dpkg --add-architecture i386 # probablemente no sea necesario agregar los repositorios i386 para instalar el paquete grub-pc
 ```
+dpkg --add-architecture i386 # probablemente no sea necesario agregar los repositorios i386 para instalar el paquete grub-pc
 apt-get update # Actualiza el listado de paquetes
 apt-get install grub-pc # Instala el paquete grub-pc
 ```
