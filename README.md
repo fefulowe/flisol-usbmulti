@@ -112,6 +112,9 @@ umount $mountpoint # Desmonta la unidad
 ## Versionado
 Empleamos [SemVer](http://semver.org/) para indicar las versiones publicadas. Para ver las versiones disponibles, consultar el [listado de etiquetas](https://github.com/fefulowe/flisol-usbmulti/tags). 
 
+## Descarga de imagen .raw lista para copiar a disco de instalación
+La última versión de esta imagen se puede [descargar ](magnet:?xt=urn:btih:d4d620f00f9689a024a6d5f17bbcdc197ef9eef6&dn=Flisol2018r20180317.raw&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Fopentor.org%3A2710&tr=udp%3A%2F%2Ftracker.ccc.de%3A80&tr=udp%3A%2F%2Ftracker.blackunicorn.xyz%3A6969&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969) con cualquier cliente bittorrent que soporte enlaces magnet (como Deluge o Transmission).
+
 ## Autores
 [Fefu](https://www.fefu.eu)
 
