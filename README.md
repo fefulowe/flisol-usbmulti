@@ -1,7 +1,7 @@
 ```
     Este archivo es parte de FLISol USB MultiBoot disk
 
-    Foobar is free software: you can redistribute it and/or modify
+    flisol-usbmulti is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
@@ -96,6 +96,9 @@ Empleamos [SemVer](http://semver.org/) para indicar las versiones publicadas. Pa
 
 ## Descarga de imagen .raw lista para copiar a disco de instalación
 La última versión de esta imagen se puede [descargar](http://mgnet.me/.Flisol2018r2018031701) con cualquier cliente bittorrent que soporte enlaces magnet (como Deluge o Transmission).
+
+## Proyectos similares
+ * https://github.com/aguslr/multibootusb
 
 ## Autores
 [Fefu](https://www.fefu.eu)
