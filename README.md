@@ -47,7 +47,7 @@ mountpoint=/mnt	# Directorio de montaje para trabajo local
 ## Asignación de constantes en base a variables predefinidas
 ```
 devdisk=/dev/$blockdisk # Unidad USB a reacondicionar
-grubdir="$mountpoint"/boot # Este comando se debe usar al 
+grubdir="$mountpoint"/boot # Directorio de configuración para GRUB
 ```
 
 ## Inicializar el disco
