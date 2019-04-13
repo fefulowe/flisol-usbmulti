@@ -1,0 +1,43 @@
+# Set splash image
+splashimage="$prefix/theme/splash.xpm.gz"
+
+# Set green text over black background
+if background_image "$prefix/theme/splash.png" ; then
+        set color_normal=green/black #1
+        set color_highlight=light-green/blue #1
+        set menu_color_normal=green/black #1
+        set menu_color_highlight=light-green/blue #1
+else
+        set color_normal=cyan/black #2
+        set color_highlight=light-green/black #2
+        set menu_color_normal=green/black #2
+        set menu_color_highlight=light-green/blue #2
+fi
+
+# Set language spanish
+set lang=es
+# Create a new variable with AR locale
+set localflisol=es_AR.UTF-8
+
+submenu "Cambiar opciones gráficas ->" {
+	menuentry "gfxpayload 640x480" {
+		set gfxpayload=640x480
+		echo gfxpayload=${gfxpayload} press enter
+		read
+	}
+	menuentry "gfxpayload 800x600" {
+		set gfxpayload=800x600
+		echo gfxpayload=${gfxpayload} press enter
+		read
+	}
+	menuentry "gfxpayload 1024x768" {
+		set gfxpayload=1024x768
+		terminal_output gfxterm
+		echo gfxpayload=${gfxpayload} press enter
+		read
+	}
+	menuentry "gfxpayload 1280x1024" {
+		echo gfxpayload=${gfxpayload} press enter
+		read
+	}
+}

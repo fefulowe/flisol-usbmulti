@@ -1,0 +1,11 @@
+256ff4122bb57d234068c21b3c78380d5960cd90922e44125ddfc2a2cb597e0a  ./debian-stretch-mini-amd64.iso
+5876d2869a80d85ae30c3df94d629cb68233042cc6816e671ebca5b92e7d90c1  ./debian-stretch-mini-i386.iso
+ea763ae74d14896568ac2eff74faf0ba5bdbb73e38d77bc12804292096d0056b  ./manjaro-xfce-18.0.4-stable-x86_64.iso
+a96b5f844f7cced5a07dbf6cf4fb3e8cec0526e11f3d16150e41b9c09f8b1872  ./memtest86+-5.01.iso
+878d61603fc7ee539fd870b23ad5e2978ffbc19ac4215cc2733dbeb37e086a65  ./nanolinux64-1.3.iso
+93eb54c9f6d9f1a59df502ce2a8ff17e7db5536cf292a954cbb518e46e2f72f8  ./super_grub2_disk_hybrid_2.02s10.iso
+0a55c61bf24edd04ce44cdf5c3736f739349652154a7e27c4b1caaeb19276ad1  ./systemrescuecd-x86-5.3.2.iso
+580378905cb1aac41125167cde936148b2b8e37646192cfbc85bfbeef6d58b85  ./systemrescuecd-6.0.2.iso
+fc7a57637bcd349be20b42a74686f06822c9f5b484c94b8d75a4e2b3d555f9e2  ./TinyCore-10.0.iso
+cc57ec9da34a15643bc417c0c96fb4cccf77876a4f4f746103e778b41accd435  ./ubuntu-mate-18.04.2-desktop-i386.iso
+9f4d3e9fcbfd94b4570597cd393c7d075ac5b835bfc72eb2c0fe57ef40f7f64f  ./ubuntu-mate-18.04.2-desktop-amd64.iso

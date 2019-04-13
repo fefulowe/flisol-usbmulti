@@ -26,6 +26,7 @@ Este proyecto contiene todas las instrucciones y archivos de configuración nece
 Para poder crear la unidad vas a necesitar:
  * Sistema operativo Debian GNU/Linux
  * git (para copiar todo este repositorio en vez de copiar archivo por archivo)
+ * wget o cliente bittorrent (para descargar archivos .iso de cada distribución)
  * una máquina de pruebas (nunca de producción) o una máquina virtual sin datos relevantes, desde la cual correr este instructivo experimental que pone en riesgo cualquier información en ella almacenada. La máquina de pruebas o máquina virtual debe tener una distribución Debian GNU/Linux de 64 bits en modo UEFI, recién instalada y sin datos
  * un pen-drive o disco USB externo con suficiente espacio (unos 8GB) para alojar los archivos de las diferentes distribuciones. Toda la información almacenada en esa unidad será eliminada irrevocablemente
  * un cerebro marginalmente funcional (casi todos tenemos uno)
@@ -38,74 +39,55 @@ git clone https://github.com/fefulowe/flisol-usbmulti
 ```
 
 [inicio del instructivo]
-##  Definir variables
+## Inicializar unidad USB
+A diferencia de la versión anterior de este proyecto (que era un procedimiento paso a paso manual para crear la unidad), esta nueva versión de disco USB aprovecha el proyecto Multiboot USB https://mbusb.aguslr.com/install.html para automatizar el particionado y copia de archivos a la unidad USB.
+
+##  Definir variables de trabajo
 ```
-blockdisk=sdupalala # Nombre del dispositivo de bloques a borrar e intervenir
-mountpoint=/mnt	# Directorio de montaje para trabajo local
+export voyaromperestedisco=sdX
+export mountpoint=/mnt	# Directorio de montaje para trabajo local
+```
+Donde <mountpoint> es el directorio que vas a usar para montar la unidad USB (por ejemplo: /media/multiusb1) y <voyaromperestedisco> corresponde a la unidad USB que vamos a reconfigurar (por ejemplo: sdb).
+
+## Limpiando la unidad
+```
+dd if=/dev/zero of=/dev/$voyaromperestedisco count=4095 # Este comando es un punto sin retorno. Los datos almacenados en el dispositivo ya no se podrán acceder.
 ```
 
-## Asignación de constantes en base a variables predefinidas
+## Replicando el repositorio multibootusb
 ```
-devdisk=/dev/$blockdisk # Unidad USB a reacondicionar
-grubdir="$mountpoint"/boot # Directorio de configuración para GRUB
-```
-
-## Inicializar el disco
-```
-dd if=/dev/zero of=$devdisk count=4095 # Este comando es un punto sin retorno. Los datos almacenados en el dispositivo ya no se podrán acceder.
+git clone https://github.com/aguslr/multibootusb
+cd multibootusb
 ```
 
-## Creación de tabla de particiones y particiones
+## Particionando y copiando archivos grub
 ```
-parted -s $devdisk mklabel gpt
-parted -s $devdisk unit s mkpart '"BIOS boot partition"' 2048 4095
-parted -s $devdisk set 1 bios_grub on
-parted -s $devdisk unit s mkpart '"EFI System"' fat32 4096 100%
-parted -s $devdisk set 2 boot on
-parted -s $devdisk set 2 esp on
-parted -s $devdisk unit s print free
-parted -s $devdisk print free
-sudo echo 1 > /sys/block/$blockdisk/device/rescan
+./makeUSB.sh --hybrid /dev/$voyaromperestedisco ext4
+sudo echo 1 > /sys/block/$voyaromperestedisco/device/rescan
 ```
 
-# Create filesystem for EFI partition
+## Particionando y copiando archivos grub
+Ahora solamente resta montar la unidad y descargar los archivos .iso a la carpeta /boot/isos . Orientativamente podemos revisar el listado de archivos con suma de verificación de la carpeta (/boot/isos/SHA256.txt). Recomendamos hacer la suma de verificación de cada uno de los archivos descargados y constatar que concuerde exactamente con los valores publicados en el sitio web de cada distribución.
 ```
-mkfs.vfat -F32 -n EFIVFAT "$devdisk"2
-```
-
-# Mount EFI partition and create boot directory
-```
-mount "$devdisk"2 $mountpoint
-mkdir $grubdir
+mount /dev/"$voyaromperestedisco"3 $mountpoint
+cd $mountpoint/boot/isos
+cat $mountopint/boot/isos/SHA256.txt
+wget --continue https://sourceforge.net/projects/systemrescuecd/files/sysresccd-x86/5.3.2/systemrescuecd-x86-5.3.2.iso/download --output-document systemrescuecd-x86-5.3.2.iso
 ```
 
 # Instalar paquetes para grub-EFI
+En caso de que la instalación presente un error al momento de copiar los archivos de grub-efi, será necesario instalar los paquetes correspondientes.
 ```
 apt-get install grub-efi # Instala el paquete grub-efi-amd64 para entornos EFI
 apt-get install grub-splashimages # Instala el paquete para habilitar el modo gráfico
-grub-install --verbose --target=x86_64-efi --efi-directory=$mountpoint --boot-directory=$grubdir --removable --recheck 
 ```
 
 # Habilitar la arquitectura i386 pra grub-pc (bios) (derivados debian solamente)
+Si el equipo solamente tiene la arquitectura amd64 y queremos agrelarle la arquitectura i386, es probable que tengamos que agregar los paquetes correspondientes.
 ```
 dpkg --add-architecture i386 # probablemente no sea necesario agregar los repositorios i386 para instalar el paquete grub-pc
 apt-get update # Actualiza el listado de paquetes
 apt-get install grub-pc # Instala el paquete grub-pc
-```
-
-## Preparar la unidad para iniciar con grub en modo Legacy Bios (contenido en el paquete grub)
-```
-grub-install --verbose --target=i386-pc --recheck --boot-directory=$grubdir $devdisk
-```
-
-## Copiar el contenido del presente repositorio
-```
-cp * $mountpoint
-```
-
-## Desmontar la unidad
-```
-umount $mountpoint # Desmonta la unidad
 ```
 [Fin del instructivo]
 

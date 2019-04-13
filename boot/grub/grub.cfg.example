@@ -1,0 +1,91 @@
+# Config for GNU GRand Unified Bootloader (GRUB)
+
+insmod font
+if loadfont unicode ; then
+  if keystatus --shift ; then true ; else
+    if [ x"${grub_platform}" = xefi ]; then
+      insmod efi_gop
+      insmod efi_uga
+      insmod videotest
+      insmod videoinfo
+    else
+      insmod vbe
+      insmod vga
+    fi
+    insmod gfxterm
+    insmod gfxmenu
+    set gfxmode=auto
+    set gfxpayload=auto
+    terminal_output gfxterm
+    if terminal_output gfxterm ; then true ; else
+      terminal gfxterm
+    fi
+  fi
+fi
+
+# Timeout for menu
+set timeout=30
+
+# Load custom GRUB configuration
+if [ -e "$prefix/grub.cfg.local" ]; then
+  source "$prefix/grub.cfg.local"
+fi
+
+# Load MBUSB configuration
+if [ -e "$prefix/mbusb.cfg" ]; then
+  source "$prefix/mbusb.cfg"
+fi
+
+# Grub options
+submenu "GRUB2 options ->" {
+  menuentry "List devices/partitions" {
+    ls -l
+    sleep --interruptible 9999
+  }
+
+  menuentry "Enable GRUB2's LVM support" {
+    insmod lvm
+  }
+
+  menuentry "Enable GRUB2's RAID support" {
+    insmod dm_nv
+    insmod mdraid09_be
+    insmod mdraid09
+    insmod mdraid1x
+    insmod raid5rec
+    insmod raid6rec
+  }
+
+  menuentry "Enable GRUB2's PATA support (to work around BIOS bugs/limitations)" {
+    insmod ata
+    update_paths
+  }
+
+  menuentry "Enable GRUB2's USB support *experimental*" {
+    insmod ohci
+    insmod uhci
+    insmod usbms
+    update_paths
+  }
+
+  menuentry "Mount encrypted volumes (LUKS and geli)" {
+    insmod luks
+    insmod geli
+    cryptomount -a
+  }
+
+  menuentry "Enable serial terminal" {
+    serial
+    terminal_input --append serial
+    terminal_output --append serial
+  }
+}
+
+# Reboot
+menuentry "Reboot" {
+  reboot
+}
+# Poweroff
+menuentry "Poweroff" {
+  halt
+}
