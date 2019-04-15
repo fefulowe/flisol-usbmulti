@@ -40,7 +40,7 @@ git clone https://github.com/fefulowe/flisol-usbmulti
 
 [inicio del instructivo]
 ## Inicializar unidad USB
-A diferencia de la versión anterior de este proyecto (que era un procedimiento paso a paso manual para crear la unidad), esta nueva versión de disco USB aprovecha el proyecto Multiboot USB https://mbusb.aguslr.com/install.html para automatizar el particionado y copia de archivos a la unidad USB.
+A diferencia de la versión anterior de este proyecto (que era un procedimiento paso a paso manual para crear la unidad), esta nueva versión de disco USB aprovecha el proyecto [Multiboot USB](https://mbusb.aguslr.com/install.html) para automatizar el particionado y copia de archivos a la unidad USB.
 
 ##  Definir variables de trabajo
 ```
@@ -95,7 +95,7 @@ apt-get install grub-pc # Instala el paquete grub-pc
 Empleamos [SemVer](http://semver.org/) para indicar las versiones publicadas. Para ver las versiones disponibles, consultar el [listado de etiquetas](https://github.com/fefulowe/flisol-usbmulti/tags). 
 
 ## Descarga de imagen .raw lista para copiar a disco de instalación
-La última versión de esta imagen se puede [descargar](http://mgnet.me/.Flisol2018r2018031701) con cualquier cliente bittorrent que soporte enlaces magnet (como Deluge o Transmission).
+La última versión de esta imagen se puede [descargar](http://mgnet.me/.Flisol2019r2019041501) con cualquier cliente bittorrent que soporte enlaces magnet (como Deluge o Transmission).
 
 ## Proyectos similares
  * https://github.com/aguslr/multibootusb
