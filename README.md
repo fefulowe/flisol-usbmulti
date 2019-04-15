@@ -62,7 +62,7 @@ cd multibootusb
 
 ## Particionando y copiando archivos grub
 ```
-./makeUSB.sh --hybrid /dev/$voyaromperestedisco ext4
+./makeUSB.sh --hybrid --efi /dev/$voyaromperestedisco ext4
 sudo echo 1 > /sys/block/$voyaromperestedisco/device/rescan
 ```
 
