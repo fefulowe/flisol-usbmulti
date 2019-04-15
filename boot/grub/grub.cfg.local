@@ -1,8 +1,11 @@
-# Set splash image
-splashimage="$prefix/theme/splash.xpm.gz"
+# Set background image
+set background=${prefix}/theme/background.png
+
+# Enable png background file support
+insmod png
 
 # Set green text over black background
-if background_image "$prefix/theme/splash.png" ; then
+if background_image ${background} ; then
         set color_normal=green/black #1
         set color_highlight=light-green/blue #1
         set menu_color_normal=green/black #1
@@ -37,6 +40,8 @@ submenu "Cambiar opciones gráficas ->" {
 		read
 	}
 	menuentry "gfxpayload 1280x1024" {
+		set gfxpayload=1280x1024
+		terminal_output gfxterm
 		echo gfxpayload=${gfxpayload} press enter
 		read
 	}
