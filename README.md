@@ -97,6 +97,22 @@ Empleamos [SemVer](http://semver.org/) para indicar las versiones publicadas. Pa
 ## Descarga de imagen .raw lista para copiar a disco de instalación
 La última versión de esta imagen se puede [descargar](http://mgnet.me/.Flisol2019r2019041501) con cualquier cliente bittorrent que soporte enlaces magnet (como Deluge o Transmission).
 
+Una vez descargada la imagen, recomendamos usar el comando ```dd``` para copiar bit a bit su contenido a la unidad USB.
+
+```
+lsblk # hace un listado de unidades de bloque
+unidad_a_borrar= /dev/sdLeeBien  # asigna a la variable unidad_a_borrar el nombre del dispositivo.
+                                 # para ello hay que reemplazar LeeBien por la letra de la unidad
+                                 # correspondiente a la unidad USB. Mucha atención, porque si
+                                 # nos equivocamos en la letra de la unidad es posible que
+                                 # destruyamos irrevocablemente otras estructuras de datos.
+                                 # Recomendamos especial cuidado y atención en este paso.
+sudo dd if=Flisol2019r2019041501.raw of=$unidad_a_borrar bs=100M status=progress # punto de no retorono.
+                                 # copia el archivo a la unidad especificada en el comando anterior.
+sync ; sync ; sync # pasa el contenido de la memoria intermedia de escritura (caché) al dispositivo
+sleep 10s # aguardar al menos 10 segundos antes de retirar el pen-drive
+```
+
 ## Proyectos similares
  * https://github.com/aguslr/multibootusb
 
